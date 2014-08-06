@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<UsingTask TaskName="WebEssentialsBundleTask" AssemblyFile="Pta.Build.WebEssentialsBundleTask.dll" />
+
+	<PropertyGroup>
+		<BuildDependsOn>WebEssentialsBundle;$(BuildDependsOn)</BuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="WebEssentialsBundle">
+		<ItemGroup>
+			<Bundles Include="@(Content)" Condition="'%(Extension)' == '.bundle'" />
+			<HtmlFiles Include="@(Content)" Condition="'%(Extension)' == '.html'" />
+		</ItemGroup>
+
+		<WebEssentialsBundleTask Configuration="$(Configuration)" ProjectDir="$(ProjectDir)" Bundles="@(Bundles)" HtmlFiles="@(HtmlFiles)" />
+	</Target>
+</Project>
