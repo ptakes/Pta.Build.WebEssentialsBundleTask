@@ -25,12 +25,12 @@ Want the same behavior as the ASP.NET Optimization framework?
 
 ### Bundle files
 
-You can create CSS and JavaScript bundle files in you _Visual Studio_ web projects.  Those files with extension
-_.css.bundle_ or _.js.bundle_ are XML files referencing the CSS and JavaScript files that are part of the bundle.
+You can create CSS and JavaScript bundle files in you _Visual Studio_ web projects. The bundle file, with extension
+_.css.bundle_ or _.js.bundle_, are XML files and referencing the CSS and JavaScript resources that are part of the bundle.
 
 _Web Essentials_ will automatically generate and update the plain and minified version of the bundle resource files.
 
-In HTML, you reference the bundle resource files as normal CSS and JavaScript resources like:
+In HTML, you reference the bundle resource file as a normal CSS and JavaScript resource like:
 
 	    <link rel='stylesheet' href='/css/app.css'>
 	    <link rel='stylesheet' href='/css/app.min.css'>
@@ -78,8 +78,7 @@ Things to note:
 
 ### The build task
 
-The build task will runs as early as possible in the build so they can be processed further by other build tasks.
-For instance they can added as embedded resources in assemblies.
+The build task will runs as early as possible in the build process so the HTML output can be processed further by other build tasks. For instance they can be added as embedded resources in assemblies.
 
 The task is define as follows:
 
@@ -94,7 +93,7 @@ The task is define as follows:
 
 ### Not supported
 
-* Web Essentials HTML and sprite bundles.
+* Web Essentials' HTML and sprite bundles.
 * The outputDirectory setting in the bundle file (also not implemented by Web Essentials 2013).
 
 ### TODOs					s
