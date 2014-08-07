@@ -54,17 +54,17 @@ For example:
 
 will be replaced with:
 
-	    <!--begin-scripts: /libs/app-->
+	    <!--begin-scripts: /js/app-->
 	    <script src='/js/app.min.js?_v=140ff438eaaede'></script>
-	    <!--end-scripts: /libs/app-->
+	    <!--end-scripts: /js/app-->
 
 or:
 
-	    <!--begin-scripts: /libs/app-->
+	    <!--begin-scripts: /js/app-->
 	    <script src='/js/app/main.js?_v=c3506a667e0dc5'></script>
 	    <script src='/js/app/dataService.js?_v=79c103a8992298'></script>
 	    <script src='/js/app/homeController.js?_v=f57f92c89eb3d8'></script>
-	    <!--end-scripts: /libs/app-->
+	    <!--end-scripts: /js/app-->
 
 depending on the build configuration. The former one is a release build, the later one a debug build.
 
