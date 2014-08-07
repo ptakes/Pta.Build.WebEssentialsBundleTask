@@ -26,7 +26,7 @@ Want the same behavior as the ASP.NET Optimization framework?
 ### Bundle files
 
 You can create CSS and JavaScript bundle files in you _Visual Studio_ web projects.  Those files with extension
-_.css.bundle_ or _.js.bundle_ are XML files referencing the CSS and JavaScript files that are be part of the bundle.
+_.css.bundle_ or _.js.bundle_ are XML files referencing the CSS and JavaScript files that are part of the bundle.
 
 _Web Essentials_ will automatically generate and update the plain and minified version of the bundle resource files.
 
