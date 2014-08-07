@@ -15,11 +15,9 @@ Want the same behavior as the ASP.NET Optimization framework?
 2. Create one or more Web Essentials' CSS or JavaScript bundle files.
 3. Reference the bundles in your HTML files, for example:
 
-	_`!!styles: /css/app!!`_
-
-	_`!!scripts: /js/vendor!!`_
-
-	_`!!scripts: /js/app!!`_
+	    !!styles: /css/app!!
+	    !!scripts: /js/vendor!!
+	    !!scripts: /js/app!!
 
 4. Build your project.
 
@@ -34,10 +32,10 @@ _Web Essentials_ will automatically generate and update the plain and minified v
 
 In HTML, you reference the bundle resource files as normal CSS and JavaScript resources like:
 
-`<link rel='stylesheet' href='/css/app.css'>`
-`<link rel='stylesheet' href='/css/app.min.css'>`
-`<script src='/js/vendor.js'></script>`
-`<script src='/js/vendor.min.js'></script>`
+	    <link rel='stylesheet' href='/css/app.css'>
+	    <link rel='stylesheet' href='/css/app.min.css'>
+	    <script src='/js/vendor.js'></script>
+	    <script src='/js/vendor.min.js'></script>
 
 There are 3 problems with this approach:
 
@@ -52,21 +50,21 @@ When a bundle reference is found, the bundle reference is replaced by a referenc
 
 For example:
 
-`!!scripts: /js/app!!`
+	    !!scripts: /js/app!!
 
 will be replaced with:
 
-`<!--begin-scripts: /libs/app-->`
-`<script src='/js/app.min.js?_v=140ff438eaaede'></script>`
-`<!--end-scripts: /libs/app-->`
+	    <!--begin-scripts: /libs/app-->
+	    <script src='/js/app.min.js?_v=140ff438eaaede'></script>
+	    <!--end-scripts: /libs/app-->
 
 or:
 
-`<!--begin-scripts: /libs/app-->`
-`<script src='/js/app/main.js?_v=c3506a667e0dc5'></script>`
-`<script src='/js/app/dataService.js?_v=79c103a8992298'></script>`
-`<script src='/js/app/homeController.js?_v=f57f92c89eb3d8'></script>`
-`<!--end-scripts: /libs/app-->`
+	    <!--begin-scripts: /libs/app-->
+	    <script src='/js/app/main.js?_v=c3506a667e0dc5'></script>
+	    <script src='/js/app/dataService.js?_v=79c103a8992298'></script>
+	    <script src='/js/app/homeController.js?_v=f57f92c89eb3d8'></script>
+	    <!--end-scripts: /libs/app-->
 
 depending on the build configuration. The former one is a release build, the later one a debug build.
 
@@ -85,20 +83,20 @@ For instance they can added as embedded resources in assemblies.
 
 The task is define as follows:
 
-> `<target name="WebEssentialsBundle">	`
-> > `<itemgroup>`
-> > > `<bundles include="@(Content)" condition="'%(Extension)' == '.bundle'" /> `
-> > > `<htmlfiles include="@(Content)" condition="'%(Extension)' == '.html'" /> `
-`</itemgroup>`
-`<WebEssentialsBundleTask Configuration="$(Configuration)" ProjectDir="$(ProjectDir)" Bundles="@(Bundles)" HtmlFiles="@(HtmlFiles)" />`
-`</Target>`
+	    <target name="WebEssentialsBundle">
+	        <itemgroup>`
+	            <bundles include="@(Content)" condition="'%(Extension)' == '.bundle'" />
+	            <htmlfiles include="@(Content)" condition="'%(Extension)' == '.html'" />
+	        </itemgroup>
+	        <WebEssentialsBundleTask Configuration="$(Configuration)" ProjectDir="$(ProjectDir)" Bundles="@(Bundles)" HtmlFiles="@(HtmlFiles)" />
+	    </Target>
 
 
-	### Not supported
+### Not supported
 
-	* Web Essentials HTML and sprite bundles.
-	* The outputDirectory setting in the bundle file (also not implemented by Web Essentials 2013).
+* Web Essentials HTML and sprite bundles.
+* The outputDirectory setting in the bundle file (also not implemented by Web Essentials 2013).
 
-	### TODOs					s
+### TODOs					s
 
-	* Make the generation of the version query string optional.
+* Make the generation of the version query string optional.
