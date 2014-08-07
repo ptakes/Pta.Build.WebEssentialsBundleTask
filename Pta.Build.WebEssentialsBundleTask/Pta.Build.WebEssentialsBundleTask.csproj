@@ -51,10 +51,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="nuget\Pta.Build.WebEssentialsBundleTask.1.0.0.nupkg" />
     <None Include="nuget\Pta.Build.WebEssentialsBundleTask.nuspec" />
     <None Include="nuget\build\Pta.Build.WebEssentialsBundleTask.targets">
       <SubType>Designer</SubType>
     </None>
+    <None Include="tools\NuGetPushNuGet.ps1" />
     <None Include="tools\NuGetPushLocal.ps1" />
     <None Include="tools\PostBuild.ps1" />
   </ItemGroup>
