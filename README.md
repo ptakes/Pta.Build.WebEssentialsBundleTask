@@ -83,7 +83,7 @@ The build task will runs as early as possible in the build process so the HTML o
 The task is define as follows:
 
 	    <target name="WebEssentialsBundle">
-	        <itemgroup>`
+	        <itemgroup>
 	            <bundles include="@(Content)" condition="'%(Extension)' == '.bundle'" />
 	            <htmlfiles include="@(Content)" condition="'%(Extension)' == '.html'" />
 	        </itemgroup>
