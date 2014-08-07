@@ -96,6 +96,6 @@ The task is define as follows:
 * Web Essentials' HTML and sprite bundles.
 * The outputDirectory setting in the bundle file (also not implemented by Web Essentials 2013).
 
-### TODOs					s
+### TODOs			
 
 * Make the generation of the version query string optional.
