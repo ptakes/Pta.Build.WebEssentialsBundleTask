@@ -17,7 +17,9 @@ Quick start
 3. Reference the bundles in your HTML files, for example:
 
 	`!!styles: /css/app!!`
+	
 	`!!scripts: /js/vendor!!`
+	
 	`!!scripts: /js/app!!`
 
 4. Build your project.
@@ -165,8 +167,8 @@ Roadmap
 * Support for wildcards in file references in the bundle file. For example: `/js/app/**/*.js`.
 * Support for HTML bundles
 * *Visual Studio* extension:
-		+ configure / customize settings
-		+ revert bundle reference (aka undo bundle expansions)
+	* configure / customize settings
+	* revert bundle reference (aka undo bundle expansions)
 
 Please note that some items will also result in pull requests for *Web Essentials*.
 
