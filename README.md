@@ -163,12 +163,12 @@ Bundle settings override project and solution properties.
 Roadmap
 -------
 
-* Support for `outputDirectory` setting in bundle files.
-* Support for wildcards in file references in the bundle file. For example: `/js/app/**/*.js`.
-* Support for HTML bundles
+* Support for the `outputDirectory` setting in bundle files.
+* Support for wildcards in file references in the bundle files. For example: `/js/app/**/*.js`.
+* Support for HTML bundles.
 * *Visual Studio* extension:
 	* configure / customize settings
-	* revert bundle reference (aka undo bundle expansions)
+	* revert bundle references (aka undo bundle reference expansions)
 
 Please note that some items will also result in pull requests for *Web Essentials*.
 
