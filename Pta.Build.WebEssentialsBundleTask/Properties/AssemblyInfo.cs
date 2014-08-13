@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("MSBUILD tasks for expanding Web Essentials bundles in HTML files.")]
+[assembly: AssemblyTitle("MSBuild tasks for expanding Web Essentials bundles in HTML files.")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -14,4 +14,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("cd14b429-9ea3-48a6-b18e-fa747fab643a")]
 
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
+[assembly: AssemblyInformationalVersion("1.0.1.0")]

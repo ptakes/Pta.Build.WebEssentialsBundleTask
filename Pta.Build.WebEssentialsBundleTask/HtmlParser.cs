@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.Build.Utilities;
 
 namespace Pta.Build.WebEssentialsBundleTask
 {
-	internal class HtmlParser
+	public class HtmlParser
 	{
 		private const string BeginBundleMarker = "<!--begin-{0}: {1}-->";
 		private const string BeginBundleMarkerMatcher = @"(?<bundle><!--\s*begin-(?<type>styles|scripts):\s+(?<key>.*)\s*)-->";
@@ -23,6 +23,7 @@ namespace Pta.Build.WebEssentialsBundleTask
 			RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
 		private readonly Context _context;
+		private TaskLoggingHelper Log { get { return _context.Log; } }
 
 		private HtmlParser(Context context)
 		{
@@ -51,7 +52,7 @@ namespace Pta.Build.WebEssentialsBundleTask
 				var endMatch = endRegex.Match(html, beginMatch.Index + beginMatch.Length);
 				if (!endMatch.Success)
 				{
-					_context.LogWarning("Bundle not end marker found for: {0}", key);
+					Log.LogWarning("Bundle not end marker found for: {0}", key);
 					start = beginMatch.Index + beginMatch.Length;
 					continue;
 				}
@@ -86,7 +87,7 @@ namespace Pta.Build.WebEssentialsBundleTask
 				var key = match.Groups["key"].Value;
 				if (!map.ContainsKey(key))
 				{
-					_context.LogError("{0} bundle '{1}' not found.", CultureInfo.InvariantCulture.TextInfo.ToTitleCase(bundleType), match.Groups["key"].Value);
+					Log.LogError("{0} bundle '{1}' not found.", CultureInfo.InvariantCulture.TextInfo.ToTitleCase(bundleType), match.Groups["key"].Value);
 					result = false;
 					continue;
 				}
@@ -112,14 +113,13 @@ namespace Pta.Build.WebEssentialsBundleTask
 		{
 			var success = true;
 
-			foreach (var htmlFile in _context.AllHtmlFiles)
+			foreach (var htmlFile in _context.HtmlFiles)
 			{
-				var htmlFilePath = Path.Combine(_context.ProjectDirectory, htmlFile);
 				var html = default(string);
 
-				if (!FileHelpers.TryReadTextFile(htmlFilePath, out html))
+				if (!PathHelper.TryReadTextFile(htmlFile, out html))
 				{
-					_context.LogError("Failed to read html file '{0}'.", htmlFilePath);
+					Log.LogError("Failed to read HTML file '{0}'.", htmlFile);
 					success = false;
 					continue;
 				}
@@ -133,9 +133,9 @@ namespace Pta.Build.WebEssentialsBundleTask
 				{
 					if (htmlHashCode != GetHashCode(html))
 					{
-						if (!FileHelpers.TryWriteTextFile(htmlFilePath, html))
+						if (!PathHelper.TryWriteTextFile(htmlFile, html))
 						{
-							_context.LogError("Failed to write to html file '{0}'.", htmlFilePath);
+							Log.LogError("Failed to write to HTML file '{0}'.", htmlFile);
 							success = false;
 						}
 					}

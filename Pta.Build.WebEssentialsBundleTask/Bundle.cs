@@ -1,102 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace Pta.Build.WebEssentialsBundleTask
 {
-	internal class Bundle
+	public class Bundle
 	{
-		private static readonly Regex BundleFileExtensionRegex = new Regex(@"\.(?<type>css|js)+\.bundle",
-			RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
-
-		public IEnumerable<string> Files { get; private set; }
+		public bool AddVersionQuery { get; private set; }
+		public File BundleFile { get; private set; }
+		public IEnumerable<File> Files { get; private set; }
 		public string Html { get; set; }
 		public string Key { get; private set; }
 		public bool Minify { get; private set; }
-		public string SettingsPath { get; private set; }
-		public string Type { get; private set; }
-		public string Url { get; private set; }
 
-		private Bundle()
+		public Bundle(Context context, string path)
 		{
+			var fullPath = PathHelper.GetFullPath(context.ProjectDirectory, path);
+			var xml = XDocument.Load(fullPath);
+
+			var resourcePath = fullPath.Substring(0, fullPath.Length - ".bundle".Length);
+
+			AddVersionQuery = GetAddVersionQuery(xml, context.AddVersionQuery);
+			BundleFile = new File(context, this, resourcePath);
+			Files = GetFiles(xml, context);
+			Key = GetKey(context.WebRootDirectory, resourcePath);
+			Minify = GetMinifyFlag(xml);
 		}
 
-		public static Bundle Load(string rootPath, string settingsPath)
+		private bool GetAddVersionQuery(XDocument xml, bool defaultValue)
 		{
-			settingsPath = FileHelpers.GetAbsolutePath(rootPath, settingsPath);
-			var xml = XDocument.Load(settingsPath);
-
-			var bundle = new Bundle
-			{
-				Files = GetFiles(xml),
-				Key = GetKey(rootPath, settingsPath),
-				Minify = GetMinifyFlag(xml),
-				SettingsPath = settingsPath,
-				Type = GetType(settingsPath)
-			};
-
-			bundle.Url = GetUrl(xml, rootPath, bundle);
-
-			return bundle;
+			var value = xml.Descendants("addVersionQuery").FirstOrDefault();
+			return (value != null) ? (bool)value : defaultValue;
 		}
 
-		private static IEnumerable<string> GetFiles(XDocument xml)
+		private IEnumerable<File> GetFiles(XDocument xml, Context context)
 		{
-			return xml.Descendants("file").Select(f => (string)f).ToArray();
+			return xml.Descendants("file")
+				.Select(f => new File(context, this, (string)f))
+				.ToArray();
 		}
 
-		private static string GetKey(string rootPath, string settingsPath)
+		private string GetKey(string webRootDirectoy, string resourcePath)
 		{
-			var key = FileHelpers.GetAbsoluteUrl(rootPath, settingsPath);
-			return BundleFileExtensionRegex.Replace(key, String.Empty);
+			resourcePath = Path.Combine(Path.GetDirectoryName(resourcePath), Path.GetFileNameWithoutExtension(resourcePath));
+			return PathHelper.GetAbsoluteUrl(webRootDirectoy, resourcePath);
 		}
 
-		private static bool GetMinifyFlag(XDocument xml)
+		private bool GetMinifyFlag(XDocument xml)
 		{
 			var value = xml.Descendants("minify").FirstOrDefault();
 			return (value != null) ? (bool)value : true;
-		}
-
-		private static string GetType(string settingsPath)
-		{
-			return BundleFileExtensionRegex.Match(settingsPath).Groups["type"].Value;
-		}
-
-		private static string GetUrl(XDocument xml, string rootPath, Bundle bundle)
-		{
-			var value = xml.Descendants("outputDirectory").FirstOrDefault();
-			var outputPath = (value != null) ? ((string)value).Trim() : null;
-
-			if (String.IsNullOrEmpty(outputPath))
-			{
-				outputPath = bundle.SettingsPath;
-			}
-			else
-			{
-				if (!Path.IsPathRooted(outputPath) || outputPath[0] == Path.DirectorySeparatorChar)
-				{
-					outputPath = outputPath.Replace('/', Path.DirectorySeparatorChar);
-					if (outputPath[0] == Path.DirectorySeparatorChar)
-					{
-						outputPath = Path.Combine(rootPath, outputPath.Substring(1));
-					}
-					else
-					{
-						outputPath = Path.Combine(Path.GetDirectoryName(bundle.SettingsPath), outputPath);
-					}
-				}
-
-				outputPath = Path.Combine(outputPath, Path.GetFileName(bundle.SettingsPath));
-			}
-
-			var replacement = bundle.Minify ? ".min" : String.Empty;
-			replacement += ".${type}";
-			outputPath = BundleFileExtensionRegex.Replace(outputPath, replacement);
-
-			return FileHelpers.GetAbsoluteUrl(rootPath, outputPath);
 		}
 	}
 }

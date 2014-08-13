@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <package >
-  <metadata>
-    <id>Pta.Build.WebEssentialsBundleTask</id>
-    <version>1.0.0</version>
-    <authors>Peter Takes</authors>
-    <owners>Peter Takes</owners>
-    <licenseUrl>https://github.com/ptakes/Pta.Build.WebEssentialsBundleTask/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/ptakes/Pta.Build.WebEssentialsBundleTask</projectUrl>
-    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>MSBUILD task for expanding Web Essentials bundles in HTML files.</description>
-    <!--<releaseNotes></releaseNotes>-->
-    <copyright>Copyright © 2014 Peter Takes. All rights reserved.</copyright>
-    <tags>JavaScript Css Html Bundle WebEssentials</tags>
-  </metadata>
+	<metadata>
+		<id>Pta.Build.WebEssentialsBundleTask</id>
+		<version>1.0.1</version>
+		<authors>Peter Takes</authors>
+		<owners>Peter Takes</owners>
+		<licenseUrl>https://github.com/ptakes/Pta.Build.WebEssentialsBundleTask/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/ptakes/Pta.Build.WebEssentialsBundleTask</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<title>MSBuild task for Web Essentials bundles</title>
+		<description>MSBuild task for expanding Web Essentials bundles in HTML files.</description>
+		<copyright>Copyright © 2014 Peter Takes. All rights reserved.</copyright>
+		<tags>JavaScript Css Html Bundle WebEssentials</tags>
+	</metadata>
 </package>

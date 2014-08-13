@@ -45,12 +45,16 @@
     <Compile Include="Bundle.cs" />
     <Compile Include="BundleMap.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="FileHelpers.cs" />
+    <Compile Include="File.cs" />
+    <Compile Include="PathHelper.cs" />
     <Compile Include="HtmlParser.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="nuget\build\Pta.Build.WebEssentialsBundleTask.props">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="nuget\Pta.Build.WebEssentialsBundleTask.nuspec" />
     <None Include="nuget\build\Pta.Build.WebEssentialsBundleTask.targets">
       <SubType>Designer</SubType>

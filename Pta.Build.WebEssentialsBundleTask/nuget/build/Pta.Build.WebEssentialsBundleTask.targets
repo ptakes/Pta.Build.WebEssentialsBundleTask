@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<UsingTask TaskName="WebEssentialsBundleTask" AssemblyFile="Pta.Build.WebEssentialsBundleTask.dll" />
+	<PropertyGroup>
+		<AssemblyFileName>.\Pta.Build.WebEssentialsBundleTask.dll</AssemblyFileName>
+	</PropertyGroup>
+	<UsingTask TaskName="WebEssentialsBundleTask" AssemblyFile="$(AssemblyFileName)" />
 
 	<PropertyGroup>
 		<BuildDependsOn>WebEssentialsBundle;$(BuildDependsOn)</BuildDependsOn>
@@ -8,10 +11,12 @@
 
 	<Target Name="WebEssentialsBundle">
 		<ItemGroup>
-			<Bundles Include="@(Content)" Condition="'%(Extension)' == '.bundle'" />
-			<HtmlFiles Include="@(Content)" Condition="'%(Extension)' == '.html'" />
+			<Bundles Include="@(Content);@(EmbeddedResource)" Condition="'%(Extension)' == '.bundle'" />
+			<HtmlFiles Include="@(Content);@(EmbeddedResource)" Condition="'%(Extension)' == '.html'" />
 		</ItemGroup>
 
-		<WebEssentialsBundleTask Configuration="$(Configuration)" ProjectDir="$(ProjectDir)" Bundles="@(Bundles)" HtmlFiles="@(HtmlFiles)" />
+		<WebEssentialsBundleTask Configuration="$(Configuration)" ProjectDir="$(ProjectDir)"
+			Bundles="@(Bundles)" HtmlFiles="@(HtmlFiles)" DebugConfiguration="$(BundleDebugConfiguration)"
+			WebRootDir="$(BundleWebRootDir)" AddVersionQuery="$(BundleAddVersionQuery)" />
 	</Target>
 </Project>
