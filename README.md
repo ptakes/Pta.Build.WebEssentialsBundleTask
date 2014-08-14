@@ -127,7 +127,7 @@ There are 3 levels of customization:
 #### Solution level customization
 
 Edit the package file *Pta.Build.WebEssentialsBundleTask.props*. The file
-can be found in the package folder `packages\Pta.Build.WebEssentialsBundleTask.1.0.1\build`.
+can be found in the package folder `packages\Pta.Build.WebEssentialsBundleTask.1.0.2\build`.
 
 Property `BundleDebugConfiguration`	specifies the build configuration name to be recognized as
 the debug build, all other configurations will be treated as release builds.
@@ -163,7 +163,6 @@ Bundle settings override project and solution properties.
 Roadmap
 -------
 
-* Support for the `outputDirectory` setting in bundle files.
 * Support for wildcards in file references in the bundle files. For example: `/js/app/**/*.js`.
 * Support for HTML bundles.
 * *Visual Studio* extension:

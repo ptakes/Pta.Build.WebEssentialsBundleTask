@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>Pta.Build.WebEssentialsBundleTask</id>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 		<authors>Peter Takes</authors>
 		<owners>Peter Takes</owners>
 		<licenseUrl>https://github.com/ptakes/Pta.Build.WebEssentialsBundleTask/blob/master/LICENSE</licenseUrl>

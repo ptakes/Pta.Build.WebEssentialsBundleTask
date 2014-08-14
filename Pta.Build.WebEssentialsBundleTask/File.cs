@@ -16,7 +16,7 @@ namespace Pta.Build.WebEssentialsBundleTask
 		public File(Context context, Bundle bundle, string path)
 		{
 			var fullPath = PathHelper.GetFullPath(context.ProjectDirectory, path);
-			if (bundle.Minify)
+			if (!context.DebugBuild && bundle.Minify)
 			{
 				fullPath = File.ExtensionRegex.Replace(fullPath, ".min.${type}");
 			}

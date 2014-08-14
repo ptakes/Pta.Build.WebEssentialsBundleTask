@@ -74,6 +74,8 @@ namespace Pta.Build.WebEssentialsBundleTask
 					Log.LogMessage("Bundle: " + bundleFile);
 					Log.LogMessage("\tType: " + type);
 					Log.LogMessage("\tKey: " + bundle.Key);
+					Log.LogMessage("\tMinify: " + bundle.Minify);
+					Log.LogMessage("\tOutputDirectory: " + bundle.OutputDirectory);
 
 					if (context.DebugBuild)
 					{
