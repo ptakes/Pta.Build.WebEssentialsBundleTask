@@ -158,7 +158,6 @@ Bundle settings override project and solution properties.
 ### Not supported
 
 * *Web Essentials* HTML and sprite bundles.
-* The `outputDirectory` setting in bundle files (also not implemented by *Web Essentials 2013*).
 
 Roadmap
 -------
